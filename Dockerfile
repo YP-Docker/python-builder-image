@@ -13,7 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ARG CONTAINER_IMAGE=quay.io/ansible/python-base:latest
+#ARG CONTAINER_IMAGE=quay.io/ansible/python-base:latest
+ARG CONTAINER_IMAGE=iissupport/awx:pbase-stream9
 ARG REMOTE_SOURCE=.
 ARG REMOTE_SOURCE_DIR=/remote-source
 ARG REMOTE_SOURCE_APP_DIR=$REMOTE_SOURCE_DIR
@@ -35,12 +36,13 @@ COPY --from=builder $REMOTE_SOURCE_APP_DIR/scripts/install-from-bindep /output/i
 
 WORKDIR $REMOTE_SOURCE_APP_DIR
 
-RUN dnf update -y \
-  && dnf install -y python38-wheel git \
-  && dnf clean all \
-  && rm -rf /var/cache/{dnf,yum} \
-  && rm -rf /var/lib/dnf/history.* \
-  && rm -rf /var/log/*
+RUN dnf update -y  \
+    && dnf install -y python3-wheel git\
+    && dnf clean all \
+    && rm -rf /var/cache/{dnf,yum}  \
+    && rm -rf /var/lib/dnf/history.*  \
+    && rm -rf /var/log/*  
+
 
 RUN cat build-requirements.txt requirements.txt | sort > upper-constraints.txt \
   && pip3 install --no-cache-dir -r build-requirements.txt -c upper-constraints.txt \
