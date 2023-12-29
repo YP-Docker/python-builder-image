@@ -14,7 +14,8 @@
 # limitations under the License.
 
 #ARG CONTAINER_IMAGE=quay.io/ansible/python-base:latest
-ARG CONTAINER_IMAGE=iissupport/awx:pbase-stream9
+#ARG CONTAINER_IMAGE=iissupport/awx:python-base-fedora39-v1.231228
+ARG CONTAINER_IMAGE
 ARG REMOTE_SOURCE=.
 ARG REMOTE_SOURCE_DIR=/remote-source
 ARG REMOTE_SOURCE_APP_DIR=$REMOTE_SOURCE_DIR
